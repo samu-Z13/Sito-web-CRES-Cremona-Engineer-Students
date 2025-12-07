@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Contatti social – CrES POLIMI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--nav-bg:#9fd6e8;--nav-text:#fff;--bg-main:#fff;--text-main:#222;--text-muted:#666;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:"Open Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+             background-color:var(--bg-main);color:var(--text-main);line-height:1.6;}
+        a{text-decoration:none;color:inherit;}
+        header{position:sticky;top:0;z-index:50;}
+        .nav{background:linear-gradient(to right,var(--nav-bg),#c4e6f2);
+             display:flex;align-items:center;justify-content:space-between;padding:0.4rem 2.5rem;}
+        .nav-left{display:flex;align-items:center;gap:0.8rem;}
+        .logo-img{width:60px;height:60px;border-radius:50%;border:2px solid #fff;object-fit:cover;}
+        .nav-menu{display:flex;align-items:center;gap:2rem;font-size:0.9rem;}
+        .nav-menu a{color:var(--nav-text);}
+        .page-wrapper{max-width:900px;margin:3rem auto 4rem;padding:0 2rem;}
+        .page-title{font-size:2rem;font-weight:700;margin-bottom:0.5rem;}
+        .page-subtitle{font-size:1rem;color:var(--text-muted);margin-bottom:2rem;}
+        .contact-list{list-style:none;margin:0;padding:0;}
+        .contact-item{margin-bottom:0.7rem;}
+        .contact-label{font-weight:600;}
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="nav-left">
+            <img src="cres-logo.png" alt="Logo CRES POLIMI" class="logo-img">
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#chi-siamo">Chi siamo</a>
+            <a href="index.html#progetti">Progetti di consulenza</a>
+            <a href="index.html#attivita">Attività studentesche</a>
+            <a href="index.html#contatti">Contatti</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page-wrapper">
+    <h1 class="page-title">Contatti social</h1>
+    <p class="page-subtitle">
+        Raccoglie i principali canali attraverso cui è possibile contattare o seguire CRES.
+        Puoi sostituire i testi con i link reali quando li avrai.
+    </p>
+
+    <ul class="contact-list">
+        <li class="contact-item">
+            <span class="contact-label">Email istituzionale:</span>
+            <span>nome@cres-polimi.it</span>
+        </li>
+        <li class="contact-item">
+            <span class="contact-label">LinkedIn:</span>
+            <span>Pagina LinkedIn CRES POLIMI</span>
+        </li>
+        <li class="contact-item">
+            <span class="contact-label">Instagram:</span>
+            <span>@cres_polimi</span>
+        </li>
+        <li class="contact-item">
+            <span class="contact-label">Altri canali:</span>
+            <span>eventuali newsletter, canali Telegram, ecc.</span>
+        </li>
+    </ul>
+</main>
+
+</body>
+</html>

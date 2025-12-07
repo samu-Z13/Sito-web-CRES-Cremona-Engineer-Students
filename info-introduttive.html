@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Info introduttive – CrES POLIMI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nav-bg: #9fd6e8;
+            --nav-text: #ffffff;
+            --bg-main: #ffffff;
+            --text-main: #222222;
+            --text-muted: #666666;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family:"Open Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+            background-color:var(--bg-main);
+            color:var(--text-main);
+            line-height:1.6;
+        }
+        a{text-decoration:none;color:inherit;}
+        header{
+            position:sticky;top:0;z-index:50;
+        }
+        .nav{
+            background:linear-gradient(to right,var(--nav-bg),#c4e6f2);
+            display:flex;align-items:center;justify-content:space-between;
+            padding:0.4rem 2.5rem;
+        }
+        .nav-left{display:flex;align-items:center;gap:0.8rem;}
+        .logo-img{
+            width:60px;height:60px;border-radius:50%;
+            border:2px solid #ffffff;object-fit:cover;
+        }
+        .nav-menu{display:flex;align-items:center;gap:2rem;font-size:0.9rem;}
+        .nav-menu a{color:var(--nav-text);}
+        .page-wrapper{
+            max-width:900px;margin:3rem auto 4rem;padding:0 2rem;
+        }
+        .page-title{font-size:2rem;font-weight:700;margin-bottom:0.5rem;}
+        .page-subtitle{font-size:1rem;color:var(--text-muted);margin-bottom:2rem;}
+        .page-section-title{font-weight:600;margin-top:1.5rem;margin-bottom:0.3rem;}
+        ul{margin-left:1.2rem;margin-top:0.3rem;}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="nav-left">
+            <img src="cres-logo.png" alt="Logo CRES POLIMI" class="logo-img">
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#chi-siamo">Chi siamo</a>
+            <a href="index.html#progetti">Progetti di consulenza</a>
+            <a href="index.html#attivita">Attività studentesche</a>
+            <a href="index.html#contatti">Contatti</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page-wrapper">
+    <h1 class="page-title">Info introduttive</h1>
+    <p class="page-subtitle">
+        Panoramica generale su CrES POLIMI e sulle sue due anime principali.
+    </p>
+
+    <h2 class="page-section-title">Le due facce di CRES</h2>
+    <p>
+        CRES nasce come realtà studentesca che unisce <strong>network e attività studentesche</strong> da un lato
+        e <strong>progetti di consulenza e attività extracurriculari</strong> dall’altro. L’idea è creare un ponte
+        tra università, studenti e mondo professionale.
+    </p>
+
+    <h2 class="page-section-title">Network e attività studentesche</h2>
+    <ul>
+        <li>Organizzazione di eventi, momenti di incontro e iniziative di community.</li>
+        <li>Attività formative, culturali e sportive dedicate agli studenti.</li>
+        <li>Opportunità per mettersi in gioco al di fuori delle lezioni.</li>
+    </ul>
+
+    <h2 class="page-section-title">Progetti di consulenza e attività extracurriculari</h2>
+    <ul>
+        <li>Collaborazioni con aziende, enti e associazioni.</li>
+        <li>Progetti strutturati su temi concreti, con obiettivi definiti.</li>
+        <li>Sviluppo di competenze utili per il mondo del lavoro.</li>
+    </ul>
+</main>
+
+</body>
+</html>

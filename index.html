@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>CRES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="cres-logo.png" />
+
+    <!-- Font: Open Sans + Archivo Black -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-light: #9fd6e8;
+            --brand-light-2: #c4e6f2;
+            --brand-strong: #00b4d8;
+            --brand-dark: #023047;
+
+            --bg-main: #f5f7fb;
+            --bg-section: #ffffff;
+            --text-main: #1f2933;
+            --text-muted: #6b7280;
+
+            --card-border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #e2f3fb 0, #f5f7fb 35%, #eef2f7 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav {
+            background: linear-gradient(to right, var(--brand-light), var(--brand-light-2));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 2.5rem;
+            position: relative;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            object-fit: cover;
+            box-shadow: 0 6px 12px rgba(15, 23, 42, 0.4);
+        }
+
+        .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.4rem;
+        }
+
+        .nav-link-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.7rem 0;
+            display: inline-block;
+            letter-spacing: 0.03em;
+        }
+
+        /* ✅ niente sfondo grigio, solo linea sotto */
+        .nav-link-wrapper::before {
+            content: none;
+        }
+
+        .nav-link-wrapper::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0.1rem;
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, #ffffff, var(--brand-strong));
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.22s ease;
+            border-radius: 999px;
+        }
+
+        .nav-link-wrapper:hover::after,
+        .nav-link-wrapper.active::after {
+            transform: scaleX(1);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* ========= Selettore lingua ========= */
+
+        .lang-wrapper {
+            position: relative;
+            font-size: 0.85rem;
+        }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .lang-toggle-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+        }
+
+        .lang-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 0.3rem;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+            padding: 0.35rem 0;
+            min-width: 130px;
+            display: none;
+            z-index: 60;
+        }
+
+        .lang-menu.open {
+            display: block;
+        }
+
+        .lang-item {
+            padding: 0.4rem 0.9rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .lang-item:hover {
+            background-color: #f0f8fb;
+        }
+
+        /* ========= Hamburger ========= */
+
+        .nav-hamburger {
+            width: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .nav-hamburger span {
+            height: 2px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 999px;
+        }
+
+        .hamburger-menu {
+            position: absolute;
+            top: 100%;
+            right: 2.5rem;
+            margin-top: 0.4rem;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+            padding: 0.4rem 0;
+            min-width: 180px;
+            display: none;
+            z-index: 55;
+        }
+
+        .hamburger-menu.open {
+            display: block;
+        }
+
+        .hamburger-item {
+            display: block;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: #111827;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .hamburger-item:hover {
+            background-color: #f3f4ff;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            position: relative;
+            min-height: calc(100vh - 70px);
+            scroll-margin-top: 0;
+            background-image: url('home-hero.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at left, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.15));
+        }
+
+        .hero-wave {
+            position: absolute;
+            right: -120px;
+            bottom: -80px;
+            width: 620px;
+            height: 320px;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .hero-inner {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            min-height: calc(100vh - 70px);
+            padding: 3rem 1.5rem 3rem 2.5rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        .hero-text {
+            text-align: right;
+            max-width: 700px;
+            margin-right: 0;
+        }
+
+        .hero-title {
+            font-family: "Archivo Black", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 6.4rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            text-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+        }
+
+        .hero-subtitle {
+            font-family: "Archivo Black", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+        }
+
+        /* ================= SEZIONI ================= */
+
+        .section-wrapper {
+            max-width: 1200px;
+            margin: 4.5rem auto 4.5rem;
+            padding: 0 2.5rem;
+            scroll-margin-top: 110px;
+        }
+
+        .section-box {
+            background-color: var(--bg-section);
+            border-radius: 18px;
+            padding: 2.4rem 2rem 2.8rem;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+
+        .section-title-main {
+            text-align: center;
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--brand-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title-underline {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--brand-strong), #219ebc);
+            margin: 0 auto 2.5rem;
+            border-radius: 999px;
+        }
+
+        /* ================= GRID / CARD ================= */
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-1 {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 2rem;
+        }
+
+        .section-card-link {
+            display: block;
+        }
+
+        .section-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            border-radius: 14px;
+            border: 1px solid var(--card-border);
+            padding: 0.6rem;
+            background: #ffffff;
+            transition:
+                box-shadow 0.22s ease,
+                transform 0.22s ease,
+                border-color 0.22s ease,
+                background-color 0.22s ease;
+        }
+
+        .section-card-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 10px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .section-card-image.small-img {
+            aspect-ratio: 4 / 2;
+        }
+
+        /* Immagini specifiche – mapping corretto */
+        .img-info-intro {
+            background-image: url('home-hero.jpg');
+        }
+
+        .img-storia {
+            background-image: url('storia.jpg');
+        }
+
+        .img-progetti {
+            background-image: url('chi-siamo.jpg');
+        }
+
+        .img-att-formative {
+            background-image: url('attivita-formative.jpg');
+        }
+
+        .img-att-culturali {
+            background-image: url('attivita-culturali.jpg');
+        }
+
+        .img-att-sportive {
+            background-image: url('attivita-sportive.jpg');
+        }
+
+        .section-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .section-card-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .section-card-text strong {
+            color: var(--text-main);
+        }
+
+        .section-card-link:hover .section-card {
+            background-color: #f5fbff;
+            border-color: #9bd5f1;
+            box-shadow: 0 16px 34px rgba(15, 23, 42, 0.16);
+            transform: translateY(-3px);
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+            .nav-center {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav {
+                padding-inline: 1.2rem;
+            }
+
+            .hero-inner {
+                padding-inline: 1.5rem;
+            }
+
+            .section-wrapper {
+                padding-inline: 1.5rem;
+            }
+
+            .hamburger-menu {
+                right: 1.2rem;
+            }
+
+            .hero-wave {
+                width: 480px;
+                height: 260px;
+                right: -140px;
+                bottom: -90px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .hero-inner {
+                padding-top: 4rem;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.8rem;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .section-box {
+                padding-inline: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =============== NAVBAR =============== -->
+    <header>
+        <div class="nav">
+            <div class="nav-left">
+                <img src="cres-logo.png" alt="Logo CRES POLIMI" class="logo-img">
+            </div>
+
+            <div class="nav-center">
+                <nav class="nav-menu">
+                    <div class="nav-link-wrapper active" data-target="home">
+                        <span class="nav-link">Home</span>
+                    </div>
+                    <div class="nav-link-wrapper" data-target="chi-siamo">
+                        <span class="nav-link">Chi siamo</span>
+                    </div>
+                    <div class="nav-link-wrapper" data-target="progetti">
+                        <span class="nav-link">Progetti di consulenza</span>
+                    </div>
+                    <div class="nav-link-wrapper" data-target="attivita">
+                        <span class="nav-link">Attività studentesche</span>
+                    </div>
+                    <div class="nav-link-wrapper" data-target="contatti">
+                        <span class="nav-link">Contatti</span>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="nav-right">
+                <!-- Selettore lingua -->
+                <div class="lang-wrapper">
+                    <div class="lang-toggle" id="lang-toggle">
+                        <span class="lang-toggle-icon"></span>
+                        <span id="lang-label">IT</span>
+                    </div>
+                    <div class="lang-menu" id="lang-menu">
+                        <div class="lang-item" data-lang="it">Italiano</div>
+                        <div class="lang-item" data-lang="en">English</div>
+                        <div class="lang-item" data-lang="es">Español</div>
+                    </div>
+                </div>
+
+                <!-- hamburger -->
+                <div class="nav-hamburger" id="hamburger-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <!-- tendina hamburger -->
+                <div class="hamburger-menu" id="hamburger-menu">
+                    <a href="signup.html" class="hamburger-item">Sign up</a>
+                    <a href="signin.html" class="hamburger-item">Sign in</a>
+                    <a href="news.html" class="hamburger-item">News</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- =============== HOME / HERO =============== -->
+    <main id="home">
+        <section class="hero" id="hero">
+            <!-- Onda bianca morbida dal basso verso destra -->
+            <svg class="hero-wave" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M -60 170
+                         C 40 150, 120 190, 210 170
+                         C 300 150, 360 190, 460 170"
+                      fill="none" stroke="white" stroke-width="4" opacity="0.9" />
+                <path d="M -60 145
+                         C 40 125, 120 165, 210 145
+                         C 300 125, 360 165, 460 145"
+                      fill="none" stroke="white" stroke-width="2.5" opacity="0.65" />
+            </svg>
+
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <h1 class="hero-title">CRES</h1>
+                    <p class="hero-subtitle">Cremona Engineer Students</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============== CHI SIAMO =============== -->
+        <section id="chi-siamo" class="section-wrapper">
+            <div class="section-box">
+                <h2 class="section-title-main">Chi siamo</h2>
+                <div class="section-title-underline"></div>
+
+                <div class="grid-2">
+                    <a href="info-introduttive.html" class="section-card-link">
+                        <article class="section-card">
+                            <div class="section-card-image img-info-intro"></div>
+                            <h3 class="section-card-title">Info introduttive</h3>
+                            <p class="section-card-text">
+                                <strong>Le due facce di CRES</strong><br>
+                                Network e attività studentesche<br>
+                                Progetti di consulenza e attività extracurriculari.
+                            </p>
+                        </article>
+                    </a>
+
+                    <a href="storia.html" class="section-card-link">
+                        <article class="section-card">
+                            <div class="section-card-image img-storia"></div>
+                            <h3 class="section-card-title">Storia</h3>
+                            <p class="section-card-text">
+                                <strong>NOI</strong><br>
+                                Org. Cremona<br>
+                                Org. Milano<br>
+                                Org. Piacenza
+                            </p>
+                        </article>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============== PROGETTI DI CONSULENZA =============== -->
+        <section id="progetti" class="section-wrapper">
+            <div class="section-box">
+                <h2 class="section-title-main">Progetti di consulenza</h2>
+                <div class="section-title-underline"></div>
+
+                <div class="grid-1">
+                    <a href="progetti-introduzione.html" class="section-card-link">
+                        <article class="section-card">
+                            <div class="section-card-image small-img img-progetti"></div>
+                            <h3 class="section-card-title">Introduzione</h3>
+                            <p class="section-card-text">
+                                <strong>Competenze</strong><br>
+                                Aree di competenza sviluppate nei progetti di consulenza.<br><br>
+                                <strong>Tipologie di attività</strong><br>
+                                Attività e format proposti ai partner esterni.<br><br>
+                                <strong>Sito di presentazione generale</strong><br>
+                                Pagina dedicata a raccontare in modo sintetico l’area progetti.
+                            </p>
+                        </article>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============== ATTIVITÀ STUDENTESCHE =============== -->
+        <section id="attivita" class="section-wrapper">
+            <div class="section-box">
+                <h2 class="section-title-main">Attività studentesche</h2>
+                <div class="section-title-underline"></div>
+
+                <div class="grid-3">
+                    <a href="attivita-formative.html" class="section-card-link">
+                        <article class="section-card">
+                            <div class="section-card-image img-att-formative"></div>
+                            <h3 class="section-card-title">Attività formative</h3>
+                            <p class="section-card-text">
+                                Seminari, workshop e momenti di formazione su competenze tecniche e trasversali.
+                            </p>
+                        </article>
+                    </a>
+
+                    <a href="attivita-culturali.html" class="section-card-link">
+                        <article class="section-card">
+                            <div class="section-card-image img-att-culturali"></div>
+                            <h3 class="section-card-title">Attività culturali</h3>
+                            <p class="section-card-text">
+                                Incontri, eventi e iniziative che valorizzano la dimensione culturale e di community.
+                            </p>
+                        </article>
+                    </a>
+
+                    <a href="attivita-sportive.html" class="section-card-link">
+                        <article class="section-card">
+                            <div class="section-card-image img-att-sportive"></div>
+                            <h3 class="section-card-title">Attività sportive</h3>
+                            <p class="section-card-text">
+                                Tornei e iniziative sportive per creare gruppo e spirito di squadra tra gli studenti.
+                            </p>
+                        </article>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============== CONTATTI =============== -->
+        <section id="contatti" class="section-wrapper">
+            <div class="section-box">
+                <h2 class="section-title-main">Contatti</h2>
+                <div class="section-title-underline"></div>
+
+                <div class="grid-1">
+                    <a href="contatti-social.html" class="section-card-link">
+                        <article class="section-card">
+                            <div class="section-card-image small-img"></div>
+                            <h3 class="section-card-title">Contatti social</h3>
+                            <p class="section-card-text">
+                                Premi sul pulsante “+” per accedere ai contatti e ai canali social ufficiali
+                                (email, LinkedIn, Instagram, ecc.).<br>
+                                Questa card è la base grafica per inserire in seguito i pulsanti reali.
+                            </p>
+                        </article>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =============== SCRIPT MENU + LINGUA =============== -->
+    <script>
+        // underline + scroll sezioni
+        const navItems = document.querySelectorAll('.nav-link-wrapper');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                const targetId = item.getAttribute('data-target');
+
+                if (targetId === 'home') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // hamburger tendina
+        const hamburgerToggle = document.getElementById('hamburger-toggle');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+
+        hamburgerToggle.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('open');
+        });
+
+        // Selettore lingua
+        const langToggle = document.getElementById('lang-toggle');
+        const langMenu = document.getElementById('lang-menu');
+        const langLabel = document.getElementById('lang-label');
+
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.lang-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const lang = item.getAttribute('data-lang');
+                langLabel.textContent = lang.toUpperCase();
+
+                if (lang === 'it') {
+                    window.location.href = 'index.html';
+                } else if (lang === 'en') {
+                    window.location.href = 'index-en.html';
+                } else if (lang === 'es') {
+                    window.location.href = 'index-es.html';
+                }
+            });
+        });
+
+        // chiudi menu quando clicchi fuori
+        document.addEventListener('click', (e) => {
+            if (!hamburgerMenu.contains(e.target) && !hamburgerToggle.contains(e.target)) {
+                hamburgerMenu.classList.remove('open');
+            }
+            if (!langMenu.contains(e.target) && !langToggle.contains(e.target)) {
+                langMenu.classList.remove('open');
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Storia – CrES POLIMI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nav-bg:#9fd6e8;--nav-text:#ffffff;
+            --bg-main:#ffffff;--text-main:#222222;--text-muted:#666666;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:"Open Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+             background-color:var(--bg-main);color:var(--text-main);line-height:1.6;}
+        a{text-decoration:none;color:inherit;}
+        header{position:sticky;top:0;z-index:50;}
+        .nav{background:linear-gradient(to right,var(--nav-bg),#c4e6f2);
+             display:flex;align-items:center;justify-content:space-between;padding:0.4rem 2.5rem;}
+        .nav-left{display:flex;align-items:center;gap:0.8rem;}
+        .logo-img{width:60px;height:60px;border-radius:50%;border:2px solid #ffffff;object-fit:cover;}
+        .nav-menu{display:flex;align-items:center;gap:2rem;font-size:0.9rem;}
+        .nav-menu a{color:var(--nav-text);}
+        .page-wrapper{max-width:900px;margin:3rem auto 4rem;padding:0 2rem;}
+        .page-title{font-size:2rem;font-weight:700;margin-bottom:0.5rem;}
+        .page-subtitle{font-size:1rem;color:var(--text-muted);margin-bottom:2rem;}
+        .page-section-title{font-weight:600;margin-top:1.5rem;margin-bottom:0.3rem;}
+        ul{margin-left:1.2rem;margin-top:0.3rem;}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="nav-left">
+            <img src="cres-logo.png" alt="Logo CRES POLIMI" class="logo-img">
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#chi-siamo">Chi siamo</a>
+            <a href="index.html#progetti">Progetti di consulenza</a>
+            <a href="index.html#attivita">Attività studentesche</a>
+            <a href="index.html#contatti">Contatti</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page-wrapper">
+    <h1 class="page-title">Storia</h1>
+    <p class="page-subtitle">
+        Come è nata CRES e come si sono sviluppate le diverse organizzazioni di sede.
+    </p>
+
+    <h2 class="page-section-title">Origini</h2>
+    <p>
+        CRES nasce dall’idea di creare uno spazio in cui gli studenti potessero progettare attività,
+        confrontarsi e collaborare con il territorio. Nel tempo l’associazione si è strutturata,
+        dando vita a una vera e propria realtà organizzata.
+    </p>
+
+    <h2 class="page-section-title">NOI</h2>
+    <p>
+        Sotto il cappello “NOI” rientrano tutte le persone che partecipano alla vita dell’associazione:
+        studenti, ex studenti, referenti di progetto e collaboratori esterni.
+    </p>
+
+    <h2 class="page-section-title">Org. Cremona</h2>
+    <p>
+        La sede di Cremona concentra molte attività legate al territorio, con iniziative culturali,
+        formative e progettuali pensate per valorizzare la realtà locale.
+    </p>
+
+    <h2 class="page-section-title">Org. Milano</h2>
+    <p>
+        La sede di Milano è maggiormente orientata a progetti di consulenza e a contatti con aziende,
+        studi professionali e organizzazioni che operano in contesti più ampi.
+    </p>
+
+    <h2 class="page-section-title">Org. Piacenza</h2>
+    <p>
+        La sede di Piacenza integra dimensione studentesca, socialità e progetti connessi alle
+        specificità del territorio, mantenendo forte il legame con il network complessivo.
+    </p>
+</main>
+
+</body>
+</html>

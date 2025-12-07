@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>CRES – Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --nav-bg: #9fd6e8;
+            --nav-bg-hover: #83c7de;
+            --nav-text: #ffffff;
+            --nav-active-bar: #00b4d8;
+
+            --bg-main: #ffffff;
+            --text-main: #222222;
+            --text-muted: #666666;
+
+            --accent-dark: #111111;
+            --card-border: #dddddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav {
+            background: linear-gradient(to right, var(--nav-bg), #c4e6f2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.4rem 2.5rem;
+            position: relative;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            object-fit: cover;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.4rem;
+        }
+
+        .nav-link-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-link {
+            color: var(--nav-text);
+            font-size: 0.95rem;
+            font-weight: 400;
+            padding: 0.7rem 0;
+            display: inline-block;
+        }
+
+        .nav-link-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: transparent;
+            z-index: -1;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-link-wrapper::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0.15rem;
+            height: 3px;
+            width: 100%;
+            background-color: var(--nav-active-bar);
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+
+        .nav-link-wrapper:hover::before {
+            background-color: rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-link-wrapper:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-link-wrapper.active::after {
+            transform: scaleX(1);
+        }
+
+        /* Hamburger + tendina */
+
+        .nav-hamburger {
+            width: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .nav-hamburger span {
+            height: 2px;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .hamburger-menu {
+            position: absolute;
+            top: 100%;
+            right: 2.5rem;
+            margin-top: 0.4rem;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            padding: 0.4rem 0;
+            min-width: 170px;
+            display: none;
+        }
+
+        .hamburger-menu.open {
+            display: block;
+        }
+
+        .hamburger-item {
+            display: block;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.9rem;
+            color: #333333;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .hamburger-item:hover {
+            background-color: #f0f8fb;
+        }
+
+        /* ================= HERO HOME ================= */
+
+        .hero {
+            padding: 3rem 2.5rem;
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: flex-end;            /* in basso */
+            justify-content: flex-start;       /* a sinistra */
+            scroll-margin-top: 90px;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 2rem;               /* ancora più giù */
+        }
+
+        .hero-title {
+            font-size: 4.8rem;                 /* più grande */
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            color: var(--accent-dark);
+            margin-bottom: 0.3rem;
+            text-align: left;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000000;
+            text-align: left;
+        }
+
+        /* ================= TITOLI DI SEZIONE ================= */
+
+        .section-wrapper {
+            max-width: 1200px;
+            margin: 5rem auto 5rem;
+            padding: 0 2.5rem;
+            scroll-margin-top: 110px;
+        }
+
+        .section-title-main {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .section-title-underline {
+            width: 120px;
+            height: 2px;
+            background-color: #000000;
+            margin: 0.2rem auto 2.5rem;
+        }
+
+        /* ================= CARD GRID (STILE SLIDE) ================= */
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2.5rem;
+        }
+
+        .grid-1 {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 2.5rem;
+        }
+
+        .section-card-link {
+            display: block;
+        }
+
+        .section-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--card-border);
+            padding: 0.6rem;
+            transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .section-card-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 4px;
+            background: linear-gradient(to top, #a8dadc, #f1faee);
+        }
+
+        /* immagini più piccole per Progetti e Contatti */
+        .section-card-image.small-img {
+            aspect-ratio: 4 / 2;   /* più bassa */
+        }
+
+        .section-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .section-card-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .section-card-text strong {
+            color: var(--text-main);
+        }
+
+        .section-card-link:hover .section-card {
+            background-color: #f2fbff;
+            border-color: #8ecae6;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+            .nav {
+                padding-inline: 1.2rem;
+            }
+
+            .nav-menu {
+                gap: 1.3rem;
+            }
+
+            .hero {
+                padding-inline: 1.5rem;
+            }
+
+            .section-wrapper {
+                padding-inline: 1.5rem;
+            }
+
+            .hamburger-menu {
+                right: 1.2rem;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 3rem;
+            }
+
+            .hero-title {
+                font-size: 3.4rem;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =============== NAVBAR =============== -->
+    <header>
+        <div class="nav">
+            <div class="nav-left">
+                <img src="cres-logo.png" alt="Logo CRES POLIMI" class="logo-img">
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-link-wrapper" data-target="home">
+                    <span class="nav-link">Home</span>
+                </div>
+                <div class="nav-link-wrapper" data-target="chi-siamo">
+                    <span class="nav-link">Chi siamo</span>
+                </div>
+                <div class="nav-link-wrapper" data-target="progetti">
+                    <span class="nav-link">Progetti di consulenza</span>
+                </div>
+                <div class="nav-link-wrapper" data-target="attivita">
+                    <span class="nav-link">Attività studentesche</span>
+                </div>
+                <div class="nav-link-wrapper" data-target="contatti">
+                    <span class="nav-link">Contatti</span>
+                </div>
+            </nav>
+
+            <!-- hamburger -->
+            <div class="nav-hamburger" id="hamburger-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- tendina hamburger -->
+            <div class="hamburger-menu" id="hamburger-menu">
+                <a href="signup.html" class="hamburger-item">Sign up</a>
+                <a href="signin.html" class="hamburger-item">Sign in</a>
+                <a href="news.html" class="hamburger-item">News</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- =============== HOME / HERO =============== -->
+    <main id="home">
+        <section class="hero">
+            <div class="hero-inner">
+                <h1 class="hero-title">CrES</h1>
+                <p class="hero-subtitle">POLIMI</p>
+            </div>
+        </section>
+
+        <!-- =============== CHI SIAMO =============== -->
+        <section id="chi-siamo" class="section-wrapper">
+            <h2 class="section-title-main">Chi siamo</h2>
+            <div class="section-title-underline"></div>
+
+            <div class="grid-2">
+                <!-- Card 1 -->
+                <a href="info-introduttive.html" class="section-card-link">
+                    <article class="section-card">
+                        <div class="section-card-image"></div>
+                        <h3 class="section-card-title">Info introduttive</h3>
+                        <p class="section-card-text">
+                            <strong>Le due facce di CRES</strong><br>
+                            Network e attività studentesche<br>
+                            Progetti di consulenza e attività extracurriculari.
+                        </p>
+                    </article>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="storia.html" class="section-card-link">
+                    <article class="section-card">
+                        <div class="section-card-image"></div>
+                        <h3 class="section-card-title">Storia</h3>
+                        <p class="section-card-text">
+                            <strong>NOI</strong><br>
+                            Org. Cremona<br>
+                            Org. Milano<br>
+                            Org. Piacenza
+                        </p>
+                    </article>
+                </a>
+            </div>
+        </section>
+
+        <!-- =============== PROGETTI DI CONSULENZA =============== -->
+        <section id="progetti" class="section-wrapper">
+            <h2 class="section-title-main">Progetti di consulenza</h2>
+            <div class="section-title-underline"></div>
+
+            <div class="grid-1">
+                <a href="progetti-introduzione.html" class="section-card-link">
+                    <article class="section-card">
+                        <div class="section-card-image small-img"></div>
+                        <h3 class="section-card-title">Introduzione</h3>
+                        <p class="section-card-text">
+                            <strong>Competenze</strong><br>
+                            Aree di competenza sviluppate nei progetti di consulenza.<br><br>
+                            <strong>Tipologie di attività</strong><br>
+                            Attività e format proposti ai partner esterni.<br><br>
+                            <strong>Sito di presentazione generale</strong><br>
+                            Pagina dedicata a raccontare in modo sintetico l’area progetti.
+                        </p>
+                    </article>
+                </a>
+            </div>
+        </section>
+
+        <!-- =============== ATTIVITÀ STUDENTESCHE =============== -->
+        <section id="attivita" class="section-wrapper">
+            <h2 class="section-title-main">Attività studentesche</h2>
+            <div class="section-title-underline"></div>
+
+            <div class="grid-3">
+                <!-- Formative -->
+                <a href="attivita-formative.html" class="section-card-link">
+                    <article class="section-card">
+                        <div class="section-card-image"></div>
+                        <h3 class="section-card-title">Attività formative</h3>
+                        <p class="section-card-text">
+                            Seminari, workshop e momenti di formazione su competenze tecniche e trasversali.
+                        </p>
+                    </article>
+                </a>
+
+                <!-- Culturali -->
+                <a href="attivita-culturali.html" class="section-card-link">
+                    <article class="section-card">
+                        <div class="section-card-image"></div>
+                        <h3 class="section-card-title">Attività culturali</h3>
+                        <p class="section-card-text">
+                            Incontri, eventi e iniziative che valorizzano la dimensione culturale e di community.
+                        </p>
+                    </article>
+                </a>
+
+                <!-- Sportive -->
+                <a href="attivita-sportive.html" class="section-card-link">
+                    <article class="section-card">
+                        <div class="section-card-image"></div>
+                        <h3 class="section-card-title">Attività sportive</h3>
+                        <p class="section-card-text">
+                            Tornei e iniziative sportive per creare gruppo e spirito di squadra tra gli studenti.
+                        </p>
+                    </article>
+                </a>
+            </div>
+        </section>
+
+        <!-- =============== CONTATTI =============== -->
+        <section id="contatti" class="section-wrapper">
+            <h2 class="section-title-main">Contatti</h2>
+            <div class="section-title-underline"></div>
+
+            <div class="grid-1">
+                <a href="contatti-social.html" class="section-card-link">
+                    <article class="section-card">
+                        <div class="section-card-image small-img"></div>
+                        <h3 class="section-card-title">Contatti social</h3>
+                        <p class="section-card-text">
+                            Premi sul pulsante “+” per accedere ai contatti e ai canali social ufficiali
+                            (email, LinkedIn, Instagram, ecc.).<br>
+                            Questa card è la base grafica per inserire in seguito i pulsanti reali.
+                        </p>
+                    </article>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- =============== SCRIPT MENU =============== -->
+    <script>
+        // underline che segue la voce cliccata
+        const navItems = document.querySelectorAll('.nav-link-wrapper');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                const targetId = item.getAttribute('data-target');
+                const targetEl = document.getElementById(targetId);
+
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // hamburger tendina
+        const hamburgerToggle = document.getElementById('hamburger-toggle');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+
+        hamburgerToggle.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('open');
+        });
+
+        // chiudi la tendina se clicchi fuori
+        document.addEventListener('click', (e) => {
+            if (!hamburgerMenu.contains(e.target) && !hamburgerToggle.contains(e.target)) {
+                hamburgerMenu.classList.remove('open');
+            }
+        });
+    </script>
+
+</body>
+</html>
