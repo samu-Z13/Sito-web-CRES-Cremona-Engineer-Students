@@ -107,7 +107,7 @@
             letter-spacing: 0.03em;
         }
 
-        /* ✅ niente sfondo grigio, solo linea sotto */
+        /* solo la linea sotto, niente cerchio grigio */
         .nav-link-wrapper::before {
             content: none;
         }
@@ -291,7 +291,7 @@
 
         .hero-title {
             font-family: "Archivo Black", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            font-size: 6.4rem;
+            font-size: 6rem;
             font-weight: 900;
             letter-spacing: 0.08em;
             color: #ffffff;
@@ -442,43 +442,56 @@
 
         /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 1100px) {
-            .nav-center {
-                display: none;
-            }
-        }
-
+        /* Tablet / laptop piccoli */
         @media (max-width: 900px) {
             .nav {
-                padding-inline: 1.2rem;
-            }
-
-            .hero-inner {
-                padding-inline: 1.5rem;
+                padding-inline: 1.4rem;
             }
 
             .section-wrapper {
-                padding-inline: 1.5rem;
+                padding-inline: 1.6rem;
+            }
+
+            .section-box {
+                padding: 2rem 1.6rem 2.4rem;
+            }
+
+            .hero-inner {
+                padding-inline: 1.6rem;
+            }
+
+            .hero-title {
+                font-size: 4.4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 2rem;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .hamburger-menu {
-                right: 1.2rem;
-            }
-
-            .hero-wave {
-                width: 480px;
-                height: 260px;
-                right: -140px;
-                bottom: -90px;
+                right: 1.4rem;
             }
         }
 
-        @media (max-width: 720px) {
+        /* Telefono */
+        @media (max-width: 600px) {
+            .nav {
+                padding-inline: 1rem;
+            }
+
+            .nav-center {
+                display: none; /* nascondo menu centrale, resta logo + lingua + hamburger */
+            }
+
             .hero-inner {
                 padding-top: 4rem;
+                padding-inline: 1.4rem;
                 align-items: center;
                 justify-content: center;
-                text-align: center;
             }
 
             .hero-text {
@@ -486,11 +499,32 @@
             }
 
             .hero-title {
-                font-size: 4rem;
+                font-size: 3.2rem;
+                letter-spacing: 0.06em;
             }
 
             .hero-subtitle {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+            }
+
+            .hero-wave {
+                width: 420px;
+                height: 230px;
+                right: -150px;
+                bottom: -80px;
+            }
+
+            .section-wrapper {
+                padding-inline: 1.2rem;
+                margin: 3.5rem auto;
+            }
+
+            .section-box {
+                padding: 1.9rem 1.4rem 2.1rem;
+            }
+
+            .section-title-main {
+                font-size: 1.7rem;
             }
 
             .grid-2,
@@ -498,8 +532,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .section-box {
-                padding-inline: 1.5rem;
+            .section-card-text {
+                font-size: 0.95rem;
+            }
+
+            .hamburger-menu {
+                right: 1rem;
             }
         }
     </style>
